@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "./axios";
 import "./Row.css";
 
-function Row({ title, fetchURL }) {
+const base_url = "https://image.tmdb.org/t/p/original/";
+
+function Row({ title, fetchURL, isLargeRow }) {
   const [movies, setMovies] = useState([]);
 
   /* A snippet of code which runs based on a spacific condition/variable */
@@ -17,14 +19,25 @@ function Row({ title, fetchURL }) {
     // if [movies], run once when load and every time movies change
   }, [fetchURL]);
 
-  console.log(movies);
+  console.table(movies);
 
   return (
-    <div>
+    <div className="row">
       {/* title */}
       <h2>{title}</h2>
 
-      {/* container -> posters */}
+      <div className="row__posters">
+        {/* several row__poster(s) */}
+
+        {movies.map((movie) => (
+          <img
+            key={movie.id}
+            className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+            src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
+            alt={movie.name}
+          />
+        ))}
+      </div>
     </div>
   );
 }
