@@ -19,8 +19,6 @@ function Row({ title, fetchURL, isLargeRow }) {
     // if [movies], run once when load and every time movies change
   }, [fetchURL]);
 
-  console.table(movies);
-
   return (
     <div className="row">
       {/* title */}
@@ -33,7 +31,9 @@ function Row({ title, fetchURL, isLargeRow }) {
           <img
             key={movie.id}
             className={`row__poster ${isLargeRow && "row__posterLarge"}`}
-            src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
+            src={`${base_url}${
+              isLargeRow ? movie.poster_path : movie.backdrop_path
+            }`}
             alt={movie.name}
           />
         ))}
