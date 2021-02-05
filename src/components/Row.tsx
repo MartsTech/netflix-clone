@@ -22,14 +22,6 @@ export const Row: React.FC<RowProps> = ({
   const [movies, setMovies] = useState<any>([]);
   const [trailerUrl, setTrailerUrl] = useState<any>("");
 
-  const opts = {
-    height: "390",
-    width: "100%",
-    playVars: {
-      autoplay: 1,
-    },
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       const request = await axios.get(fetchURL);
@@ -75,7 +67,18 @@ export const Row: React.FC<RowProps> = ({
             )
         )}
       </div>
-      {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
+      {trailerUrl && (
+        <YouTube
+          videoId={trailerUrl}
+          opts={{
+            height: "390",
+            width: "100%",
+            playerVars: {
+              autoplay: 1,
+            },
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "firebase": "^8.2.5",
     "movie-trailer": "^2.0.7",
+    "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.1.3",

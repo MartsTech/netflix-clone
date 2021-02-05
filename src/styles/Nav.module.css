@@ -23,13 +23,15 @@
 .logo {
   position: fixed;
   left: 20px;
-  width: 80px;
+  width: 150px;
+  height: 30px;
   object-fit: contain;
   cursor: pointer;
 }
 
 .avatar {
   position: fixed;
+  top: 20px;
   right: 20px;
   cursor: pointer;
 }
