@@ -21,8 +21,8 @@ const App: React.FC = () => {
       if (userAuth) {
         dispatch(
           login({
+            uid: userAuth.uid,
             email: userAuth.email!,
-            displayName: userAuth.displayName!,
           })
         );
       } else {

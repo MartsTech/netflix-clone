@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
 
 type UserContent = {
-  displayName: string;
+  uid: string;
   email: string;
 };
 
