@@ -4,7 +4,6 @@ import { RootState } from "../app/store";
 type UserContent = {
   displayName: string;
   email: string;
-  photoUrl: string;
 };
 
 interface UserState {
