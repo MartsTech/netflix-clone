@@ -1,11 +1,13 @@
 import { Button } from "@material-ui/core";
-import React, { lazy, useState } from "react";
+import React, { lazy, useRef, useState } from "react";
 import styles from "../styles/Login.module.css";
 
 const SignIn = lazy(() => import("./SignUp"));
 
 const Login: React.FC = () => {
   const [signIn, setSignIn] = useState<boolean>(false);
+
+  const emailRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className={styles.login}>
@@ -22,7 +24,7 @@ const Login: React.FC = () => {
 
       <div className={styles.body}>
         {signIn ? (
-          <SignIn />
+          <SignIn email={emailRef.current?.value} />
         ) : (
           <>
             <h1>Unlimited films, TV programmes and more.</h1>
@@ -34,7 +36,11 @@ const Login: React.FC = () => {
 
             <div className={styles.input}>
               <form>
-                <input type="email" placeholder="Email Address"></input>
+                <input
+                  ref={emailRef}
+                  type="email"
+                  placeholder="Email Address"
+                ></input>
                 <Button onClick={() => setSignIn(true)}>GET STARTED</Button>
               </form>
             </div>

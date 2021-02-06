@@ -7,18 +7,30 @@ import {
   InputLabel,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { closeIntro, openIntro } from "src/features/introSlice";
 import { auth } from "src/firebase";
 import styles from "../styles/SignUp.module.css";
 
-const SignIn: React.FC = () => {
+interface SignInProps {
+  email?: string;
+}
+
+const SignIn: React.FC<SignInProps> = ({ email }) => {
   const [signMethod, setSignMethod] = useState<"Sign In" | "Sign Up">(
     "Sign In"
   );
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const emailRef = useRef<HTMLInputElement>(null);
+  const [emailState, setEmailState] = useState<string>();
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setEmailState(email);
+  }, [email]);
 
   const changeSignMethod = () => {
     if (signMethod === "Sign In") {
@@ -38,14 +50,12 @@ const SignIn: React.FC = () => {
   };
 
   const login = async () => {
-    console.log(emailRef.current?.value);
-    console.log(passwordRef.current?.value);
-    if (emailRef.current?.value && passwordRef.current?.value) {
+    if (emailState && passwordRef.current?.value) {
       await auth
-        .signInWithEmailAndPassword(
-          emailRef.current.value,
-          passwordRef.current.value
-        )
+        .signInWithEmailAndPassword(emailState, passwordRef.current.value)
+        .then(() => {
+          selectIntro();
+        })
         .catch((err: Error) => alert(err.message));
     } else {
       alert("Enter Email and Password");
@@ -53,16 +63,24 @@ const SignIn: React.FC = () => {
   };
 
   const register = async () => {
-    if (emailRef.current?.value && passwordRef.current?.value) {
+    if (emailState && passwordRef.current?.value) {
       await auth
-        .createUserWithEmailAndPassword(
-          emailRef.current.value,
-          passwordRef.current.value
-        )
+        .createUserWithEmailAndPassword(emailState, passwordRef.current.value)
+        .then(() => {
+          selectIntro();
+        })
         .catch((err: Error) => alert(err.message));
     } else {
       alert("Enter Email and Password");
     }
+  };
+
+  const selectIntro = () => {
+    dispatch(openIntro());
+
+    setTimeout(() => {
+      dispatch(closeIntro());
+    }, 5000);
   };
 
   return (
@@ -72,7 +90,12 @@ const SignIn: React.FC = () => {
         <div className={styles.container}>
           <FormControl className={styles.input}>
             <InputLabel htmlFor="email">Email</InputLabel>
-            <Input inputRef={emailRef} type="email" disableUnderline />
+            <Input
+              value={emailState}
+              onChange={(e) => setEmailState(e.target.value)}
+              type="email"
+              disableUnderline
+            />
           </FormControl>
         </div>
 

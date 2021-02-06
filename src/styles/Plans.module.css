@@ -16,3 +16,8 @@
   background-color: #e50914;
   font-weight: 600;
 }
+
+.disabled > button {
+  background-color: gray !important;
+  color: white !important;
+}
