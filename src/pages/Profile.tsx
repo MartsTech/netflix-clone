@@ -3,6 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Nav } from "../components/Nav";
+import { Plans } from "../components/Plans";
 import { selectUser } from "../features/userSlice";
 import { auth } from "../firebase";
 import styles from "../styles/Profile.module.css";
@@ -28,6 +29,7 @@ const Profile: React.FC = () => {
             <h2>{user?.email}</h2>
             <div className={styles.plans}>
               <h3>Plans</h3>
+              <Plans />
               <Button className={styles.signOut} onClick={signOut}>
                 Sign Out
               </Button>

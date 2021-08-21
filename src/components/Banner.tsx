@@ -1,5 +1,7 @@
 import { Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+//@ts-ignore
+import TypeWriter from "react-typewriter";
 import axios from "../axios";
 import requests from "../requests";
 import styles from "../styles/Banner.module.css";
@@ -8,17 +10,20 @@ export const Banner: React.FC = () => {
   const [movie, setMovie] = useState<any>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const request = await axios.get(requests.fetchNetflixOriginals);
-      setMovie(
-        request.data.results[
-          Math.floor(Math.random() * request.data.results.length - 1)
-        ]
-      );
-      return request;
-    };
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    const num = Math.floor(Math.random() * Object.keys(requests).length);
+    const category = Object.keys(requests)[num];
+    const request = await axios.get(requests[category]);
+    setMovie(
+      request.data.results[
+        Math.floor(Math.random() * request.data.results.length)
+      ]
+    );
+    return request;
+  };
 
   const truncate = (str: string, n: number) => {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
@@ -37,13 +42,17 @@ export const Banner: React.FC = () => {
     >
       <div className={styles.content}>
         <h1 className={styles.title}>
-          {movie?.title || movie?.name || movie?.original_name}
+          <TypeWriter typing={1}>
+            {movie?.title || movie?.name || movie?.original_name}
+          </TypeWriter>
         </h1>
         <div className={styles.buttons}>
           <Button>Play</Button>
-          <Button>My List</Button>
+          <Button onClick={fetchData}>Random Movie</Button>
         </div>
-        <h1 className={styles.description}>{truncate(movie?.overview, 150)}</h1>
+        <h1 className={styles.description}>
+          <TypeWriter typing={1}>{truncate(movie?.overview, 150)}</TypeWriter>
+        </h1>
       </div>
       <div className={styles.fadeBottom}></div>
     </header>
