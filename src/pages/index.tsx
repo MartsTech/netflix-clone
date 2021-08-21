@@ -1,12 +1,12 @@
-import IsAuth from "modules/auth/IsAuth";
-import Home from "modules/home/Home";
+import IsNotAuth from "modules/auth/IsNotAuth";
+import Start from "modules/user/start/Start";
 
-const HomePage = () => {
+const StartPage = () => {
   return (
-    <IsAuth>
-      <Home />
-    </IsAuth>
+    <IsNotAuth>
+      <Start />
+    </IsNotAuth>
   );
 };
 
-export default HomePage;
+export default StartPage;

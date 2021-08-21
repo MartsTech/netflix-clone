@@ -9,7 +9,7 @@ const IsNotAuth: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      router.replace("/");
+      router.replace("/home");
     }
   }, [user, router]);
 

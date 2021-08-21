@@ -9,7 +9,7 @@ const IsAuth: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!user && !loading) {
-      router.replace("/login");
+      router.replace("/");
     }
   }, [user, loading, router]);
 
