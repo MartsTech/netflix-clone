@@ -1,5 +1,5 @@
+import Logo from "components/logo/Logo";
 import BackgroundLayout from "../shared/BackgroundLayout";
-import Logo from "../shared/Logo";
 import StartButton from "./StartButton";
 import StartInfo from "./StartInfo";
 import StartInput from "./StartInput";
@@ -7,7 +7,7 @@ import StartInput from "./StartInput";
 const Start = () => {
   return (
     <BackgroundLayout>
-      <Logo />
+      <Logo path="/" />
       <StartButton />
       <StartInfo />
       <StartInput />

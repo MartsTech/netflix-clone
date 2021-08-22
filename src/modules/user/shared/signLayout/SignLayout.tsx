@@ -1,6 +1,6 @@
+import Logo from "components/logo/Logo";
 import styled from "styled-components";
 import BackgroundLayout from "../BackgroundLayout";
-import Logo from "../Logo";
 import SignLayoutProvider from "./SignLayoutProvider";
 import SignLayoutText from "./SignLayoutText";
 
@@ -11,7 +11,7 @@ interface SignLayoutProps {
 const SignLayout: React.FC<SignLayoutProps> = ({ title, children }) => {
   return (
     <BackgroundLayout>
-      <Logo />
+      <Logo path="/" />
       <StyledContainer>
         <StyledTitle>{title}</StyledTitle>
         {children}

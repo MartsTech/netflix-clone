@@ -2,11 +2,15 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
-const Logo = () => {
+interface LogoProps {
+  path: string;
+}
+
+const Logo: React.FC<LogoProps> = ({ path }) => {
   const router = useRouter();
 
   return (
-    <StyledLogo onClick={() => router.push("/")}>
+    <StyledLogo onClick={() => router.push(path)}>
       <Image
         src="/images/logo.png"
         width={150}
