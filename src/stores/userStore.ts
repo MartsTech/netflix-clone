@@ -1,8 +1,8 @@
-import { auth, db, provider } from "config/firebase";
-import { makeAutoObservable, runInAction } from "mobx";
+import { auth, provider } from "config/firebase";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { toast } from "react-toastify";
-import { User } from "types/user";
-import { resetStore } from "./store";
+import { User, UserRole } from "types/user";
+import { resetStore, store } from "./store";
 
 class UserStore {
   user: User | null = null;
@@ -10,11 +10,39 @@ class UserStore {
 
   constructor() {
     makeAutoObservable(this);
+
+    reaction(
+      () => this.user,
+      (user) => {
+        if (
+          user &&
+          typeof store.paymentStore.currentSubscription === "undefined"
+        ) {
+          store.paymentStore.getCurrentSubscription();
+        }
+      }
+    );
   }
 
   reset = () => {
     this.user = null;
     this.loading = true;
+  };
+
+  getUserRole = async () => {
+    if (!auth.currentUser) {
+      toast.error("An Error Occurred. Please try again.");
+      return null;
+    }
+    await auth.currentUser.getIdToken(true);
+    const decodedToken = await auth.currentUser.getIdTokenResult();
+    const role = decodedToken.claims.stripeRole;
+
+    if (role === "basic" || "standard" || "premium") {
+      return role as UserRole;
+    }
+
+    return null;
   };
 
   signInEmail = (email: string, password: string) => {
@@ -54,13 +82,6 @@ class UserStore {
               photoURL: user.photoURL,
             };
           });
-
-          db.collection("users").doc(user.uid).set(
-            {
-              email: user.email,
-            },
-            { merge: true }
-          );
         }
       })
       .catch((error) => {
@@ -84,14 +105,6 @@ class UserStore {
               photoURL: user.photoURL!,
             };
           });
-
-          db.collection("users").doc(user.uid).set(
-            {
-              email: user.email,
-              photoURL: user.photoURL,
-            },
-            { merge: true }
-          );
         }
       })
       .catch((error) => {

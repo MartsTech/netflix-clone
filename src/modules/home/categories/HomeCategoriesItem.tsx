@@ -24,6 +24,10 @@ export default HomeCategoriesItem;
 const StyledContainer = styled.div`
   margin-left: 1.25rem;
   color: white;
+
+  @media (max-width: 640px) {
+    margin-left: 0;
+  }
 `;
 
 const StyledTitle = styled.h2``;

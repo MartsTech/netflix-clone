@@ -56,6 +56,10 @@ const StyledTitle = styled.h1`
   font-weight: 800;
   padding-bottom: 0.3rem;
   text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+
+  @media (max-width: 640px) {
+    font-size: 2rem;
+  }
 `;
 
 const StyledButtons = styled.div``;
@@ -84,12 +88,17 @@ const StyledButton = styled(Button)`
 `;
 
 const StyledDescription = styled.h1`
-  width: 45rem;
+  max-width: 50%;
   line-height: 1.3;
   padding-top: 1rem;
   font-size: 0.8rem;
   height: 5rem;
   text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+  word-wrap: break-word;
+
+  @media (max-width: 640px) {
+    max-width: 100%;
+  }
 `;
 
 const StyledFade = styled.div`

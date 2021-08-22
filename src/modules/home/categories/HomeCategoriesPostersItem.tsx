@@ -38,6 +38,7 @@ const StyledContainer = styled.div<{ large: boolean }>`
   position: relative;
   margin-right: 0.75rem;
   transition: transform 450ms;
+  cursor: pointer;
   min-height: ${({ large }) => (large ? "15.75rem" : "6.25rem")};
   min-width: ${({ large }) => (large ? "10.75rem" : "11.25rem")};
 

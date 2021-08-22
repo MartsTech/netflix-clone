@@ -16,7 +16,6 @@ const StyledContainer = styled.div`
   height: 100vh;
   background: url("/images/cover.jpg") center no-repeat;
   background-size: cover;
-  overflow: hidden;
 `;
 
 const StyledGradient = styled.div`
