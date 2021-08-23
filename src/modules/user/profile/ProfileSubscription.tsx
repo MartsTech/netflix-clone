@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-
 import { useStore } from "stores/store";
 import styled from "styled-components";
 
@@ -31,5 +30,3 @@ const StyledTitle = styled.h3`
   padding-bottom: 0.75rem;
   font-weight: 500;
 `;
-
-const StyledPlan = styled.span``;

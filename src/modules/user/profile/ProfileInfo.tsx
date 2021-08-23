@@ -13,7 +13,7 @@ const ProfileInfo = () => {
         {user?.email[0]}
       </StyledAvatar>
       <StyledDetails>
-        <StyledEmail>{user?.email}</StyledEmail>
+        <StyledEmail>test@gmail.com</StyledEmail>
         <ProfileSubscription />
         <ProfileProducts />
         <StyledButton onClick={signOut}>Sign Out</StyledButton>
