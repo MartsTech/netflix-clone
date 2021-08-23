@@ -1,7 +1,7 @@
 import { auth, provider } from "config/firebase";
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { toast } from "react-toastify";
-import { User, UserRole } from "types/user";
+import { User } from "types/user";
 import { resetStore, store } from "./store";
 
 class UserStore {
@@ -27,22 +27,6 @@ class UserStore {
   reset = () => {
     this.user = null;
     this.loading = true;
-  };
-
-  getUserRole = async () => {
-    if (!auth.currentUser) {
-      toast.error("An Error Occurred. Please try again.");
-      return null;
-    }
-    await auth.currentUser.getIdToken(true);
-    const decodedToken = await auth.currentUser.getIdTokenResult();
-    const role = decodedToken.claims.stripeRole;
-
-    if (role === "basic" || "standard" || "premium") {
-      return role as UserRole;
-    }
-
-    return null;
   };
 
   signInEmail = (email: string, password: string) => {

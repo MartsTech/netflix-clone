@@ -5,10 +5,12 @@ import { Product } from "types/product";
 
 interface ProfileProductsItemProps {
   product: Product;
+  current: boolean;
 }
 
 const ProfileProductsItem: React.FC<ProfileProductsItemProps> = ({
   product,
+  current,
 }) => {
   const { name, description, prices } = product;
   const { createCheckout } = useStore().paymentStore;
@@ -19,8 +21,11 @@ const ProfileProductsItem: React.FC<ProfileProductsItemProps> = ({
         <StyledName>{name}</StyledName>
         <StyledDescription>{description}</StyledDescription>
       </StyledInfo>
-      <StyledButton onClick={() => prices && createCheckout(prices.priceId)}>
-        Subscribe
+      <StyledButton
+        disabled={current}
+        onClick={() => prices && createCheckout(prices.priceId)}
+      >
+        {!current ? "Subscribe" : "Current"}
       </StyledButton>
     </StyledContainer>
   );
@@ -47,11 +52,12 @@ const StyledDescription = styled.h6``;
 
 const StyledButton = styled(Button)`
   &&& {
+    width: 7.5rem;
     padding: 0.5rem 1.25rem;
     font-size: 1rem;
-    color: #fff;
-    background-color: #e50914;
     font-weight: 600;
     text-transform: none;
+    color: #fff;
+    background-color: ${({ disabled }) => (!disabled ? "#e50914" : "gray")};
   }
 `;

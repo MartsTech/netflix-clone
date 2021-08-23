@@ -3,5 +3,3 @@ export interface User {
   email: string;
   photoURL: string | null;
 }
-
-export type UserRole = "basic" | "standard" | "premium";

@@ -2,6 +2,7 @@ import { Avatar, Button } from "@material-ui/core";
 import { useStore } from "stores/store";
 import styled from "styled-components";
 import ProfileProducts from "./ProfileProducts";
+import ProfileSubscription from "./ProfileSubscription";
 
 const ProfileInfo = () => {
   const { user, signOut } = useStore().userStore;
@@ -13,7 +14,7 @@ const ProfileInfo = () => {
       </StyledAvatar>
       <StyledDetails>
         <StyledEmail>{user?.email}</StyledEmail>
-        <StyledTitle>Plans</StyledTitle>
+        <ProfileSubscription />
         <ProfileProducts />
         <StyledButton onClick={signOut}>Sign Out</StyledButton>
       </StyledDetails>
@@ -59,12 +60,6 @@ const StyledEmail = styled.h2`
   padding-left: 1.25rem;
 `;
 
-const StyledTitle = styled.h3`
-  margin-top: 1.25rem;
-  border-bottom: 1px solid #282c2d;
-  padding-bottom: 0.75rem;
-`;
-
 const StyledButton = styled(Button)`
   &&& {
     padding: 0.75rem 1.25rem;
@@ -75,5 +70,6 @@ const StyledButton = styled(Button)`
     background-color: #e50914;
     font-weight: 600;
     text-transform: none;
+    margin-bottom: 1rem;
   }
 `;

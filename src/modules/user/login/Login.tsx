@@ -3,7 +3,7 @@ import TextInput from "components/form/TextInput";
 import { Form, Formik } from "formik";
 import { useStore } from "stores/store";
 import * as Yup from "yup";
-import SignLayout from "../shared/signLayout/SignLayout";
+import SignLayout from "../shared/SignLayout";
 
 const validationSchema = Yup.object({
   email: Yup.string()

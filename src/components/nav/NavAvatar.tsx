@@ -1,5 +1,4 @@
 import { Avatar } from "@material-ui/core";
-import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import { useStore } from "stores/store";
 import styled from "styled-components";
@@ -19,7 +18,7 @@ const NavAvatar = () => {
   );
 };
 
-export default observer(NavAvatar);
+export default NavAvatar;
 
 const StyledAvatar = styled(Avatar)`
   &&& {

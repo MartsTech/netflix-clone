@@ -9,6 +9,7 @@ import { store } from "./store";
 class PaymentStore {
   productRegistry = new Map<string, Product>();
   stripe: Stripe | null = null;
+  loading = true;
   currentSubscription?: Subscription | null;
   unsubscribeCurrentSubscription?: () => void;
 
@@ -19,12 +20,13 @@ class PaymentStore {
   reset = () => {
     this.productRegistry.clear();
     this.stripe = null;
+    this.loading = true;
     this.currentSubscription = undefined;
 
     if (this.unsubscribeCurrentSubscription) {
       this.unsubscribeCurrentSubscription();
-      this.unsubscribeCurrentSubscription = undefined;
     }
+    this.unsubscribeCurrentSubscription = undefined;
   };
 
   get products() {
@@ -59,8 +61,9 @@ class PaymentStore {
   };
 
   createCheckout = async (priceId: string) => {
-    if (!this.stripe) {
-      this.stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
+    if (this.loading) {
+      toast.error("Please wait. The session is loading.");
+      return;
     }
 
     const { user } = store.userStore;
@@ -68,6 +71,12 @@ class PaymentStore {
     if (!user) {
       toast.error("An error occurred. Please try again.");
       return;
+    }
+
+    this.loading = true;
+
+    if (!this.stripe) {
+      this.stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
     }
 
     const docRef = await db
@@ -90,6 +99,10 @@ class PaymentStore {
         this.stripe?.redirectToCheckout({ sessionId });
       }
     });
+
+    runInAction(() => {
+      this.loading = false;
+    });
   };
 
   getCurrentSubscription = () => {
@@ -105,14 +118,31 @@ class PaymentStore {
       .doc(user.uid)
       .collection("subscriptions")
       .onSnapshot(async (snapshot) => {
-        const doc = snapshot.docs[0];
-
-        if (doc) {
-          this.currentSubscription = doc.data() as Subscription;
-        } else {
-          this.currentSubscription = null;
-        }
+        snapshot.docs.forEach((doc) => {
+          runInAction(() => {
+            if (doc) {
+              this.currentSubscription = {
+                role: doc.data().role,
+                current_period_start: this.formatPeriod(
+                  doc.data().current_period_start.seconds
+                ),
+                current_period_end: this.formatPeriod(
+                  doc.data().current_period_end.seconds
+                ),
+              };
+            } else {
+              this.currentSubscription = null;
+            }
+          });
+        });
+        runInAction(() => {
+          this.loading = false;
+        });
       });
+  };
+
+  private formatPeriod = (seconds: number) => {
+    return new Date(seconds * 1000).toLocaleDateString();
   };
 }
 

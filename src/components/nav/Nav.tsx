@@ -23,7 +23,7 @@ const StyledNav = styled.nav<{ show?: boolean }>`
   top: 0;
   padding: 1.25rem;
   width: 100%;
-  height: 5rem;
+  height: 4rem;
   z-index: 1;
   transition: all 0.5s;
   transition-timing-function: ease-in;

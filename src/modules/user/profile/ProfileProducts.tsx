@@ -5,13 +5,22 @@ import styled from "styled-components";
 import ProfileProductsItem from "./ProfileProductsItem";
 
 const ProfileProducts = () => {
-  const { products } = useStore().paymentStore;
+  const { products, currentSubscription } = useStore().paymentStore;
 
   return (
     <StyledContainer>
-      {products.map((product) => (
-        <ProfileProductsItem key={product.name} product={product} />
-      ))}
+      {products.map((product) => {
+        const isCurrentPackage =
+          product.metadata.firebaseRole === currentSubscription?.role;
+
+        return (
+          <ProfileProductsItem
+            key={product.name}
+            product={product}
+            current={isCurrentPackage}
+          />
+        );
+      })}
     </StyledContainer>
   );
 };
