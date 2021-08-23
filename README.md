@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="https://facebook-clone-martstech.vercel.app">
+  <a href="https://netflix-clone-martstech.vercel.app">
       <img width="200px" src="https://1000logos.net/wp-content/uploads/2017/05/Netflix-Logo-2006.png" alt="Netflix Logo" />
   </a>
   <br />
