@@ -39,7 +39,7 @@ Test card: 4242 4242 4242 4242
 
 Test Account:
 email: test@gmail.com
-password: test
+password: testing
 
 ---
 
