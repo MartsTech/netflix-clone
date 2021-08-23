@@ -35,6 +35,12 @@
 
 Here is a working live demo [here](https://netflix-clone-martstech.vercel.app)
 
+Test card: 4242 4242 4242 4242
+
+Test Account:
+email: test@gmail.com
+password: testing
+
 ---
 
 ## Key Features
