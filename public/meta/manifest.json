@@ -1,0 +1,14 @@
+{
+  "name": "Netflix Clone",
+  "short_name": "Netflix Clone",
+  "icons": [
+    {
+      "src": "/meta/google-touch-icon.png",
+      "sizes": "512x512"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "https://netflix-clone-martstech.vercel.app"
+}
