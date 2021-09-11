@@ -20,9 +20,7 @@ export const store: Store = {
 
 export const StoreContext = createContext(store);
 
-export const useStore = () => {
-  return useContext(StoreContext);
-};
+export const useStore = () => useContext(StoreContext);
 
 export const resetStore = () => {
   const { commonStore, userStore, movieStore, paymentStore } = store;

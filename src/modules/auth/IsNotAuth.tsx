@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useStore } from "stores/store";
 
 const IsNotAuth: React.FC = ({ children }) => {

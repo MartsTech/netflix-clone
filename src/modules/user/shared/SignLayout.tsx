@@ -1,12 +1,14 @@
 import { Button } from "@material-ui/core";
 import Logo from "components/logo/Logo";
 import { useRouter } from "next/router";
+import React from "react";
 import { useStore } from "stores/store";
 import styled from "styled-components";
 import BackgroundLayout from "./BackgroundLayout";
 
 interface SignLayoutProps {
   title: string;
+  children: React.ReactNode;
 }
 
 const SignLayout: React.FC<SignLayoutProps> = ({ title, children }) => {

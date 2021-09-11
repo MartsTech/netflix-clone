@@ -1,5 +1,6 @@
 import { MOVIES_BASE_URL } from "constants/movies";
 import Image from "next/image";
+import React from "react";
 import { useStore } from "stores/store";
 import styled from "styled-components";
 import { Movie } from "types/movies";

@@ -9,8 +9,8 @@ const ProfileSubscription = () => {
     <StyledContainer>
       <StyledTitle>
         {!currentSubscription
-          ? " Plans"
-          : "Current Plan: " + `(${currentSubscription.role})`}
+          ? "Plans"
+          : `Current Plan: (${currentSubscription.role})`}
       </StyledTitle>
 
       {currentSubscription && (

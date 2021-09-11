@@ -1,5 +1,12 @@
-import { auth, provider } from "config/firebase";
-import { makeAutoObservable, reaction, runInAction } from "mobx";
+import { auth } from "config/firebase";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  User as FirebaseUser,
+} from "firebase/auth";
+import { makeAutoObservable, reaction } from "mobx";
 import { toast } from "react-toastify";
 import { User } from "types/user";
 import { resetStore, store } from "./store";
@@ -32,18 +39,9 @@ class UserStore {
   signInEmail = (email: string, password: string) => {
     this.loading = true;
 
-    auth
-      .signInWithEmailAndPassword(email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        if (user) {
-          runInAction(() => {
-            this.user = {
-              uid: user.uid,
-              email: user.email!,
-              photoURL: user.photoURL,
-            };
-          });
-        }
+        this.setUser(user);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -55,18 +53,9 @@ class UserStore {
   signUpEmail = (email: string, password: string) => {
     this.loading = true;
 
-    auth
-      .createUserWithEmailAndPassword(email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        if (user) {
-          runInAction(() => {
-            this.user = {
-              uid: user.uid,
-              email: user.email!,
-              photoURL: user.photoURL,
-            };
-          });
-        }
+        this.setUser(user);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -78,18 +67,9 @@ class UserStore {
   signInProvider = () => {
     this.loading = true;
 
-    auth
-      .signInWithPopup(provider)
+    signInWithPopup(auth, new GoogleAuthProvider())
       .then(({ user }) => {
-        if (user) {
-          runInAction(() => {
-            this.user = {
-              uid: user.uid,
-              email: user.email!,
-              photoURL: user.photoURL!,
-            };
-          });
-        }
+        this.setUser(user);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -103,8 +83,17 @@ class UserStore {
     resetStore();
   };
 
-  setUser = (user: User | null) => {
-    this.user = user;
+  setUser = (user: FirebaseUser | null) => {
+    if (user) {
+      this.user = {
+        uid: user.uid,
+        email: user.email!,
+        photoURL: user.photoURL,
+      };
+    } else {
+      this.user = null;
+    }
+
     this.loading = false;
   };
 }
