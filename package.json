@@ -20,7 +20,7 @@
     "@material-ui/icons": "^4.11.2",
     "@stripe/stripe-js": "^1.18.0",
     "axios": "^0.21.4",
-    "firebase": "^9.1.0",
+    "firebase": "^9.1.1",
     "formik": "^2.2.9",
     "mobx": "^6.3.3",
     "mobx-react-lite": "^3.2.1",
