@@ -22,7 +22,7 @@
     "axios": "^0.22.0",
     "firebase": "^9.1.2",
     "formik": "^2.2.9",
-    "mobx": "^6.3.3",
+    "mobx": "^6.3.5",
     "mobx-react-lite": "^3.2.1",
     "movie-trailer": "^2.1.0",
     "next": "11.1.2",
