@@ -21,6 +21,8 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-fragments": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-no-useless-fragment": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "no-unused-vars": "off",
     "no-use-before-define": "off",
