@@ -1,7 +1,5 @@
 <h1 align="center">
-  <a href="https://netflix-clone-martstech.vercel.app">
-      <img width="200px" src="https://1000logos.net/wp-content/uploads/2017/05/Netflix-Logo-2006.png" alt="Netflix Logo" />
-  </a>
+  <img width="200px" src="https://1000logos.net/wp-content/uploads/2017/05/Netflix-Logo-2006.png" alt="Netflix Logo" />
   <br />
   Netflix Clone
   <br />
@@ -18,7 +16,6 @@
 </p>
 
 <p align="center">
-  <a href="#demo">Demo</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#key-technologies">Key Technologies</a> •
   <a href="#setup">Setup</a> •
@@ -28,18 +25,6 @@
 
 ![Home Screenshot](public/screenshots/home.png?raw=true "Home Screenshot")
 ![Payment Screenshot](public/screenshots/payment.png?raw=true "Payment Screenshot")
-
----
-
-## Demo
-
-Here is a working live demo [here](https://netflix-clone-martstech.vercel.app)
-
-Test card: 4242 4242 4242 4242
-
-Test Account:
-email: test@gmail.com
-password: testing
 
 ---
 
